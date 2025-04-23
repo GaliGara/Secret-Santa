@@ -1,4 +1,5 @@
 import { html, css, LitElement, } from "lit";
+import "./assets/add-participant";
 
 export class SecretSanta extends LitElement{
 
@@ -20,6 +21,7 @@ export class SecretSanta extends LitElement{
     return html `
     
     <h1>Component</h1>
+    <add-participant></add-participant>
     `;
   }
 
