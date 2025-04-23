@@ -9,6 +9,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@material/mwc-button": "^0.27.0",
+    "@material/mwc-list": "^0.27.0",
+    "@material/mwc-tab-bar": "^0.27.0",
+    "@material/mwc-textfield": "^0.27.0",
     "lit": "^3.2.1"
   },
   "devDependencies": {
