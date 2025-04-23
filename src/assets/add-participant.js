@@ -31,9 +31,7 @@ export class AddParticipant extends LitElement {
     addPerson(){
         
         this.participant = this.shadowRoot.querySelector('#inputAdd').value;
-        console.log(this.participant)
-        
-        this.dispatchEvent(new CustomEvent('createPersonList', { detail: this.participant}));
+        this.dispatchEvent(new CustomEvent('PersonList', { detail: this.participant}));
 
     }
     
