@@ -2,6 +2,7 @@ import { css, LitElement, html, nothing } from 'lit';
 import '@material/mwc-list'
 import '@material/mwc-button'
 import '@material/mwc-select'
+import '@material/mwc-textfield'
 
 export class WishList extends LitElement {
     
@@ -9,6 +10,8 @@ export class WishList extends LitElement {
         return{
             drawList: { type: Array },
             isListCompleted: { type: Boolean },
+            wishItems: { type: Array },
+            wish: { type: String },
 
         }
     }
@@ -19,11 +22,19 @@ export class WishList extends LitElement {
         super();
         this.drawList = [];
         this.isListCompleted = false;
+        this.wishItems = [];
+        this.wish = '';
+
     }
 
     createWish(){
         this.isListCompleted = true;
-        this.dispatchEvent(new CustomEvent('toggleWish', { detail: this.isListCompleted}));
+        this.wish = this.shadowRoot.querySelector('#inputWish').value
+        console.log('wish', this.wishItems)
+
+        this.dispatchEvent(new CustomEvent('toggleWish', {
+             detail: { listCompleted: this.isListCompleted, wishItem: this.wish}
+            }));
 
     }
     render() {
@@ -35,24 +46,32 @@ export class WishList extends LitElement {
                     <mwc-list-item twoline>
                         <span>${item.person}</span>
                         ${this.isListCompleted? html `
-                        <span slot="secondary">${item.person}</span>
-                        `: nothing}
-                        
-                    </mwc-list-item>
-                    
+                        <span slot="secondary">${this.wishItems}</span>`: nothing}                     
+                    </mwc-list-item>                    
                         `;})}
             </mwc-list>
         </div>
         
-        ${this.isListCompleted? html `    
+        ${this.drawList.length >= 3? html `    
         <mwc-select>
             ${this.drawList.map(item =>{ return html`
             <mwc-list-item>${item.person}</mwc-list-item>
             `})}    
-        </mwc-select>`
+        </mwc-select>
+
+            <mwc-textfield
+                id="inputWish"
+                class="rounded"
+                label="My Textfield"
+                outlined>
+            </mwc-textfield>
+            
+          <mwc-button @click=${this.createWish}>agregar wish</mwc-button>
+        `
         : nothing}
 
-        <mwc-button @click=${this.createWish}>agregar wish</mwc-button>
+
+      
 
         `;
     }

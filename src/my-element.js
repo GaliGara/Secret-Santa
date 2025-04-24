@@ -32,6 +32,7 @@ export class SecretSanta extends LitElement{
   toggleparticipants(event){
     this.minimumParticipants = event
     console.log('min?', this.minimumParticipants)
+    console.log('wish', event.detail.wishItem)
   }
 
   render(){
