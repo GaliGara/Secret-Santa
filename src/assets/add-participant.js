@@ -1,4 +1,4 @@
-import { LitElement, css, html } from 'lit';
+import { LitElement, css, html, nothing } from 'lit';
 import '@material/mwc-textfield';
 import '@material/mwc-button'
 
@@ -8,7 +8,7 @@ export class AddParticipant extends LitElement {
         return{
 
             participant: { type: String },
-            
+            minimumParticipants: { type: Boolean },
 
         }
     }
@@ -26,6 +26,7 @@ export class AddParticipant extends LitElement {
     constructor(){
         super();
         this.participant = ''
+        
     }
 
     addPerson(){
@@ -37,13 +38,14 @@ export class AddParticipant extends LitElement {
     
     render() {
         return html`
-        <mwc-textfield
-            id="inputAdd"
-            class="rounded"
-            label="My Textfield"
-            outlined>
-        </mwc-textfield>
-        <mwc-button @click=${this.addPerson}>agregar</mwc-button>
+
+            <mwc-textfield
+                id="inputAdd"
+                class="rounded"
+                label="My Textfield"
+                outlined>
+            </mwc-textfield>
+            <mwc-button @click=${this.addPerson}>agregar</mwc-button>
 
         `;
     }

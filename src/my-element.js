@@ -1,4 +1,4 @@
-import { html, css, LitElement, } from "lit";
+import { html, css, LitElement, nothing, } from "lit";
 import "./assets/add-participant";
 import "./assets/wish-list"
 
@@ -9,6 +9,8 @@ export class SecretSanta extends LitElement{
 
 
       participantList: { type: Array },
+      minimumParticipants: { type: Boolean },
+      wishesList: { type: Array },
     };
   }
 
@@ -19,24 +21,36 @@ export class SecretSanta extends LitElement{
   constructor(){
     super();
     this.participantList = [];
+    this.minimumParticipants = false;
+    this.wishesList = [];
   }
 
 
   createParticipantList(person){
     this.participantList = [ ...this.participantList, {person}]
-    console.log('list', this.participantList)
+  }
+  toggleparticipants(event){
+    this.minimumParticipants = event
+    console.log('min?', this.minimumParticipants)
   }
 
   render(){
     return html `
     
-    <h1>Component</h1>
+    <h1>Secret Santa</h1>
+    ${!this.minimumParticipants? html `
+    
     <add-participant
+    .minimumParticipants=${this.minimumParticipants}
     @PersonList=${(e) => this.createParticipantList(e.detail)}
-    ></add-participant>
+    ></add-participant>    
+    `
+    : nothing}
+
 
     <wish-list
-    .drawList=${this.participantList} 
+    .drawList=${this.participantList}
+    @toggleWish=${(e) => this.toggleparticipants(e.detail)} 
     ></wihs-list>
     `;
   }
