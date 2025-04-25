@@ -43,9 +43,9 @@ export class WishList extends LitElement {
             <mwc-list>
                 ${this.drawList.map(item => { return html`
                     <mwc-list-item twoline>
-                        <span>${item.person}</span>
+                        <span>${item.name}</span>
                         ${this.isListCompleted? html `
-                        <span slot="secondary">${this.wishItems}</span>`: nothing}                     
+                        <span slot="secondary">${item.ID}</span>`: nothing}                     
                     </mwc-list-item>                    
                         `;})}
             </mwc-list>
@@ -53,8 +53,8 @@ export class WishList extends LitElement {
         
         ${this.drawList.length >= 3? html `    
         <mwc-select>
-            ${this.drawList.map(item =>{ return html`
-            <mwc-list-item>${item.person}</mwc-list-item>
+            ${this.drawList.map((item, index) =>{ return html`
+            <mwc-list-item value="${index}">${item.name}</mwc-list-item>
             `})}    
         </mwc-select>
 

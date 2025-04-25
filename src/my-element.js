@@ -30,18 +30,26 @@ export class SecretSanta extends LitElement{
     this.participantList = [
       ...this.participantList,
       {
-       name: person,
+       name: person.name,
        ID : person.id,
        wish: []
       }
     ];
   }
 
-  toggleparticipants(event){
+  handleWish(event){
     this.minimumParticipants = event
     
     console.log('participantList', this.participantList)
-    console.log('wish', event.detail.wishItem)
+    console.log('wish', event.wishItem)
+    this.participantList = [
+      ...this.participantList,
+      {
+       name: [...name],
+       ID : [...ID],
+       wish: [event.wishItem]
+      }
+    ];
   }
 
   render(){
@@ -60,7 +68,7 @@ export class SecretSanta extends LitElement{
 
     <wish-list
     .drawList=${this.participantList}
-    @toggleWish=${(e) => this.toggleparticipants(e.detail)} 
+    @toggleWish=${(e) => this.handleWish(e.detail)} 
     ></wihs-list>
     `;
   }
