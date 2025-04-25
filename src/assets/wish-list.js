@@ -30,7 +30,6 @@ export class WishList extends LitElement {
     createWish(){
         this.isListCompleted = true;
         this.wish = this.shadowRoot.querySelector('#inputWish').value
-        console.log('wish', this.wishItems)
 
         this.dispatchEvent(new CustomEvent('toggleWish', {
              detail: { listCompleted: this.isListCompleted, wishItem: this.wish}

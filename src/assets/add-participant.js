@@ -9,6 +9,7 @@ export class AddParticipant extends LitElement {
 
             participant: { type: String },
             minimumParticipants: { type: Boolean },
+            participanId: { type: Number },
 
         }
     }
@@ -26,13 +27,14 @@ export class AddParticipant extends LitElement {
     constructor(){
         super();
         this.participant = ''
+        this.participanId = 0
         
     }
 
     addPerson(){
         
         this.participant = this.shadowRoot.querySelector('#inputAdd').value;
-        this.dispatchEvent(new CustomEvent('PersonList', { detail: this.participant}));
+        this.dispatchEvent(new CustomEvent('PersonList', { detail: {name: this.participant, id: this.participanId++}}));
 
     }
     

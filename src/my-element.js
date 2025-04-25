@@ -27,11 +27,20 @@ export class SecretSanta extends LitElement{
 
 
   createParticipantList(person){
-    this.participantList = [ ...this.participantList, {person}]
+    this.participantList = [
+      ...this.participantList,
+      {
+       name: person,
+       ID : person.id,
+       wish: []
+      }
+    ];
   }
+
   toggleparticipants(event){
     this.minimumParticipants = event
-    console.log('min?', this.minimumParticipants)
+    
+    console.log('participantList', this.participantList)
     console.log('wish', event.detail.wishItem)
   }
 
