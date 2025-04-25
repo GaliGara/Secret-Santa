@@ -30,9 +30,12 @@ export class WishList extends LitElement {
     createWish(){
         this.isListCompleted = true;
         this.wish = this.shadowRoot.querySelector('#inputWish').value
+        const selectedPerson = this.shadowRoot.querySelector('mwc-select').selected;
+        const wishID = selectedPerson ? selectedPerson.id : null
+
 
         this.dispatchEvent(new CustomEvent('toggleWish', {
-             detail: { listCompleted: this.isListCompleted, wishItem: this.wish}
+             detail: { listCompleted: this.isListCompleted, wishItem: this.wish, selectID: wishID}
             }));
 
     }
@@ -54,7 +57,7 @@ export class WishList extends LitElement {
         ${this.drawList.length >= 3? html `    
         <mwc-select>
             ${this.drawList.map((item, index) =>{ return html`
-            <mwc-list-item value="${index}">${item.name}</mwc-list-item>
+            <mwc-list-item class="wish" id="${index}">${item.name}</mwc-list-item>
             `})}    
         </mwc-select>
 
