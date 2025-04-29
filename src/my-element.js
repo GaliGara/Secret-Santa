@@ -54,6 +54,26 @@ export class SecretSanta extends LitElement{
     })
   }
 
+  crearEnDuro() {
+    this.participantList = [
+      {
+        name: "Brandon",
+        ID: 1,
+        wish: ["rave", "music", "weed"]
+      },
+      {
+        name: "Enrique",
+        ID: 2,
+        wish: ["moto", "music", "travel"]
+      },
+      {
+        name: "May",
+        ID: 3,
+        wish: ["cat", "paint", "art"]
+      }
+    ];
+  }
+
   render(){
     return html `
     
