@@ -48,7 +48,8 @@ export class WishList extends LitElement {
                     <mwc-list-item twoline>
                         <span>${item.name}</span>
                         ${this.isListCompleted? html `
-                        <span slot="secondary">${item.ID}</span>`: nothing}                     
+                    ${item.wish.map( i => {return html `<span slot="secondary">${i} </span>`})}
+                    `: nothing }
                     </mwc-list-item>                    
                         `;})}
             </mwc-list>
