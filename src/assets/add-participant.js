@@ -31,16 +31,13 @@ export class AddParticipant extends LitElement {
         
     }
 
-    addPerson(){
-        
+    addPerson(){        
         this.participant = this.shadowRoot.querySelector('#inputAdd').value;
         this.dispatchEvent(new CustomEvent('PersonList', { detail: {name: this.participant, id: this.participanId++}}));
-
     }
     
     render() {
         return html`
-
             <mwc-textfield
                 id="inputAdd"
                 class="rounded"

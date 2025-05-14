@@ -39,41 +39,23 @@ export class SecretSanta extends LitElement{
 
   handleWish(event){
     this.minimumParticipants = event
-    console.log(event.selectID)
-    
-    // this.participantList = this.participantList.map(participant => {
-    //   if( participant.ID === event.selectID){
-    //     return {
-
-    //       ...participant,
-    //       wish: [...participant.wish, event.wishItem], 
-          
-    //     }
-    //   }
-    //   return participant
-    // })
-  }
-
-  crearEnDuro() {
-    this.participantList = [
-      {
-        name: "Brandon",
-        ID: 1,
-        wish: ["rave", "music", "weed"]
-      },
-      {
-        name: "Enrique",
-        ID: 2,
-        wish: ["moto", "music", "travel"]
-      },
-      {
-        name: "May",
-        ID: 3,
-        wish: ["cat", "paint", "art"]
-      }
-    ];
+    console.log(event.wishItem)
     console.log(this.participantList)
+    
+    this.participantList = this.participantList.map(participant => {
+      if( participant.ID == event.selectID){
+        return {
+
+          ...participant,
+          wish: [...participant.wish, event.wishItem], 
+          
+        }
+      }
+      return participant
+    })
   }
+
+
 
   render(){
     return html `
@@ -83,7 +65,7 @@ export class SecretSanta extends LitElement{
     
     <add-participant
     .minimumParticipants=${this.minimumParticipants}
-    @PersonList=${(e) => this.crearEnDuro()}
+    @PersonList=${(e) => this.createParticipantList(e.detail)}
     ></add-participant>    
     `
     : nothing}
