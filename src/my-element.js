@@ -1,6 +1,8 @@
 import { html, css, LitElement, nothing, } from "lit";
 import "./assets/add-participant";
 import "./assets/wish-list"
+import "./assets/person-draw"
+
 
 export class SecretSanta extends LitElement{
 
@@ -39,8 +41,6 @@ export class SecretSanta extends LitElement{
 
   handleWish(event){
     this.minimumParticipants = event
-    console.log(event.wishItem)
-    console.log(this.participantList)
     
     this.participantList = this.participantList.map(participant => {
       if( participant.ID == event.selectID){
@@ -55,6 +55,15 @@ export class SecretSanta extends LitElement{
     })
   }
 
+  // handleParticipant(){
+
+  //   this.participantList = this.participantList.map( participan => {
+  //     (participan.ID == event.selectID)
+  //     ? {...participant, wish: [...participant.wish, event.wishItem]}
+  //     : participant
+  //   })
+  // }
+
 
 
   render(){
@@ -68,13 +77,15 @@ export class SecretSanta extends LitElement{
     @PersonList=${(e) => this.createParticipantList(e.detail)}
     ></add-participant>    
     `
-    : nothing}
+    : html`<person-draw></person-draw>`}
 
 
     <wish-list
     .drawList=${this.participantList}
     @toggleWish=${(e) => this.handleWish(e.detail)} 
     ></wihs-list>
+
+    
     `;
   }
 
