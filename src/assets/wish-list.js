@@ -9,7 +9,6 @@ export class WishList extends LitElement {
     static get properties(){
         return{
             drawList: { type: Array },
-            isListCompleted: { type: Boolean },
             wishItems: { type: Array },
             wish: { type: String },
 
@@ -22,21 +21,19 @@ export class WishList extends LitElement {
     constructor(){
         super();
         this.drawList = [];
-        this.isListCompleted = false;
         this.wishItems = [];
         this.wish = '';
 
     }
 
     createWish(){
-        this.isListCompleted = true;
         this.wish = this.shadowRoot.querySelector('#inputWish').value
         const selectedPerson = this.shadowRoot.querySelector('mwc-select').selected;
         const wishID = selectedPerson ? selectedPerson.id : null
 
 
         this.dispatchEvent(new CustomEvent('toggleWish', {
-             detail: { listCompleted: this.isListCompleted, wishItem: this.wish, selectID: wishID}
+             detail: { done: true, wishItem: this.wish, selectID: wishID}
             }));
 
     }

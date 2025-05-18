@@ -41,6 +41,7 @@ export class SecretSanta extends LitElement{
 
   handleWish(event){
     this.minimumParticipants = event
+    console.log(event)
     
     this.participantList = this.participantList.map(participant => {
       if( participant.ID == event.selectID){
