@@ -38,6 +38,7 @@ export class SecretSanta extends LitElement{
   }
 
   handleWish(event){
+    console.log(this.participantList)
     
     this.participantList = this.participantList.map(participant => {
       if( participant.ID == event.selectID){
@@ -72,15 +73,17 @@ export class SecretSanta extends LitElement{
     @PersonList=${(e) => this.createParticipantList(e.detail)}
     ></add-participant>    
     
-
-
-
+    
     <wish-list
     .drawList=${this.participantList}
     @toggleWish=${(e) => this.handleWish(e.detail)} 
-    ></wihs-list>
-
+    ></wish-list>
     
+    ${this.participantList.length > 0 &&
+      this.participantList.every(p => p.wish.length >= 1)
+        ? html`<person-draw></person-draw>`
+        : nothing}
+      
     `;
   }
 
