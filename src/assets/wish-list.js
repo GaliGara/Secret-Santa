@@ -45,7 +45,7 @@ export class WishList extends LitElement {
                 ${this.drawList.map(item => { return html`
                     <mwc-list-item twoline>
                         <span>${item.name}</span>
-                        ${this.isListCompleted? html `
+                        ${!this.drawList.done ? html `
                     ${item.wish.map( i => {return html `<span slot="secondary">${i} </span>`})}
                     `: nothing }
                     </mwc-list-item>                    

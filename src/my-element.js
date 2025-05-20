@@ -11,7 +11,6 @@ export class SecretSanta extends LitElement{
 
 
       participantList: { type: Array },
-      minimumParticipants: { type: Boolean },
       wishesList: { type: Array },
     };
   }
@@ -23,7 +22,6 @@ export class SecretSanta extends LitElement{
   constructor(){
     super();
     this.participantList = [];
-    this.minimumParticipants = false;
     this.wishesList = [];
   }
 
@@ -40,8 +38,6 @@ export class SecretSanta extends LitElement{
   }
 
   handleWish(event){
-    this.minimumParticipants = event
-    console.log(event)
     
     this.participantList = this.participantList.map(participant => {
       if( participant.ID == event.selectID){
@@ -71,14 +67,12 @@ export class SecretSanta extends LitElement{
     return html `
     
     <h1>Secret Santa</h1>
-    ${!this.minimumParticipants? html `
     
     <add-participant
-    .minimumParticipants=${this.minimumParticipants}
     @PersonList=${(e) => this.createParticipantList(e.detail)}
     ></add-participant>    
-    `
-    : html`<person-draw></person-draw>`}
+    
+
 
 
     <wish-list
