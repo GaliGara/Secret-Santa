@@ -82,9 +82,10 @@ export class SecretSanta extends LitElement{
      : `no hay participantes`}
     </div>
 
-    ${this.participantList.length > 0 &&
-      this.participantList.every(p => p.wish.length >= 1)
-        ? html`<person-draw></person-draw>`
+    ${(this.participantList.length >= 3)
+        ? html`<person-draw
+        .drawList=${this.participantList}
+        ></person-draw>`
         : nothing}
       
     `;
