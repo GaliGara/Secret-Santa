@@ -73,12 +73,15 @@ export class SecretSanta extends LitElement{
     @PersonList=${(e) => this.createParticipantList(e.detail)}
     ></add-participant>    
     
-    
-    <wish-list
+    <div>
+    ${this.participantList.length > 0 ? html`
+      <wish-list
     .drawList=${this.participantList}
     @toggleWish=${(e) => this.handleWish(e.detail)} 
-    ></wish-list>
-    
+    ></wish-list>`
+     : `no hay participantes`}
+    </div>
+
     ${this.participantList.length > 0 &&
       this.participantList.every(p => p.wish.length >= 1)
         ? html`<person-draw></person-draw>`
