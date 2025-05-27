@@ -65,13 +65,18 @@ export class SecretSanta extends LitElement{
 
 
   render(){
+    const necesitaAgregarParticipante =
+    this.participantList.length === 0 ||    
+    this.participantList.some(p => p.wish.length === 0);
     return html `
     
     <h1>Secret Santa</h1>
     
+    ${necesitaAgregarParticipante ? html `
     <add-participant
     @PersonList=${(e) => this.createParticipantList(e.detail)}
-    ></add-participant>    
+    ></add-participant>` 
+      : nothing}    
     
     <div>
     ${this.participantList.length > 0 ? html`
@@ -80,13 +85,16 @@ export class SecretSanta extends LitElement{
     @toggleWish=${(e) => this.handleWish(e.detail)} 
     ></wish-list>`
      : `no hay participantes`}
-    </div>
 
-    ${(this.participantList.length >= 3)
+   ${(this.participantList.length >= 3)
         ? html`<person-draw
         .drawList=${this.participantList}
         ></person-draw>`
         : nothing}
+
+    </div>
+
+ 
       
     `;
   }
