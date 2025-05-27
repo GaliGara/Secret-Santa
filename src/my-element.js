@@ -65,6 +65,12 @@ export class SecretSanta extends LitElement{
 
 
   render(){
+  // Usamos `.some()` para mostrar el componente <add-participant> siempre que
+  // al menos un participante tenga el array `wish` vacío.
+  // Esto permite que se pueda seguir agregando participantes mientras haya
+  // alguien sin deseos agregados.
+  // Si usáramos `.every()` en cambio, solo se mostraría si TODOS tienen `wish` vacío,
+  // lo que impediría agregar más participantes si hay mezcla de participantes con y sin deseos.
     const necesitaAgregarParticipante =
     this.participantList.length === 0 ||    
     this.participantList.some(p => p.wish.length === 0);
