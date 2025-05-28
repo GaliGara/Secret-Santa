@@ -12,6 +12,7 @@ export class SecretSanta extends LitElement{
 
       participantList: { type: Array },
       wishesList: { type: Array },
+      canShowDraw: { type: Boolean},
     };
   }
 
@@ -23,6 +24,7 @@ export class SecretSanta extends LitElement{
     super();
     this.participantList = [];
     this.wishesList = [];
+    this.canShowDraw = false;
   }
 
 
@@ -87,15 +89,17 @@ export class SecretSanta extends LitElement{
     <div>
     ${this.participantList.length > 0 ? html`
       <wish-list
+      ?hidden=${this.canShowDraw}
     .drawList=${this.participantList}
     @toggleWish=${(e) => this.handleWish(e.detail)} 
     ></wish-list>`
      : `no hay participantes`}
 
-   ${(this.participantList.length >= 3)
-        ? html`<person-draw
+   ${(this.participantList.length >= 3)? html`
+      <person-draw
+        @showDraw=${() =>  this.canShowDraw = true}
         .drawList=${this.participantList}
-        ></person-draw>`
+      ></person-draw>`
         : nothing}
 
     </div>

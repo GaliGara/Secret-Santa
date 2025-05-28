@@ -1,5 +1,6 @@
 import { LitElement, html, css, nothing } from 'lit';
 import '@material/mwc-button'
+import '@material/mwc-list'
 
 export class PersonDraw extends LitElement {
     
@@ -9,14 +10,14 @@ export class PersonDraw extends LitElement {
 
     static get properties(){
         return {
-            draw: { type: Boolean },
+            isDraw: { type: Boolean },
             drawList : { type: Array},
         }
     }
 
     constructor(){
         super();
-        this.draw = false;
+        this.isDraw = false;
         this.drawList = [];
 
     }
@@ -24,7 +25,9 @@ export class PersonDraw extends LitElement {
 
     handleDraw(){
 
-        this.draw = true
+        this.isDraw = true
+        this.dispatchEvent(new CustomEvent('showDraw'));
+        
     }
 
     render(){
@@ -33,6 +36,19 @@ export class PersonDraw extends LitElement {
         const canDraw = this.drawList.every(p => p.wish.length >= 1)
         return html`
         <mwc-button @click="${this.handleDraw}" ?disabled="${!canDraw}">draw</mwc-button>
+
+        ${this.isDraw? html`
+
+        <mwc-list>
+
+        ${this.drawList.map( item => html`
+        <mwc-list-item>
+            <span> la persona ${item.name}, le regala ${item.wish} a  </span>
+        </mwc-list-item>` )}
+
+        </mwc-list>
+
+        `:nothing}
 
         `
     }
