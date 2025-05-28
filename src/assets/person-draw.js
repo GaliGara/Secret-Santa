@@ -41,10 +41,17 @@ export class PersonDraw extends LitElement {
 
         <mwc-list>
 
-        ${this.drawList.map( item => html`
+        ${this.drawList.map( (item, index, array) =>{
+        // nextIndex representa el índice del "receptor" (la persona que recibe el regalo)
+        // Se calcula como el siguiente en la lista respecto al participante actual (index)
+        // Usamos el operador % para hacer que el sorteo sea circular: 
+        // cuando el índice actual es el último, el siguiente vuelve a ser el primero (índice 0)
+        const nextIndex = (index + 1) % array.length;
+        const recipient = array[nextIndex];
+        return html`
         <mwc-list-item>
-            <span> la persona ${item.name}, le regala ${item.wish} a  </span>
-        </mwc-list-item>` )}
+            <span> la persona ${item.name}, le regala ${item.wish} a ${recipient.name} </span>
+        </mwc-list-item>` })}
 
         </mwc-list>
 
